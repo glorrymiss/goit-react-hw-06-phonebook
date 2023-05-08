@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Label, Button, Input } from './ContactForm.styled';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { nanoid } from '@reduxjs/toolkit';
 import { addContacts } from 'redux/contacts';
 
-export function ContactForm({ hendleSubmit }) {
+export const ContactForm = () => {
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  console.log(name);
   const hendleInputChange = event => {
     const { name, value } = event.currentTarget;
     switch (name) {
@@ -25,11 +27,18 @@ export function ContactForm({ hendleSubmit }) {
   };
   const onSubmit = event => {
     event.preventDefault();
-
-    hendleSubmit({ name, number });
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      alert(`${name} is already in contacts`);
+      return;
+    } else {
+      dispatch(addContacts({ id: nanoid(), name, number }));
+    }
 
     reset();
-    dispatch(addContacts({ name, number }));
   };
 
   const reset = () => {
@@ -66,8 +75,4 @@ export function ContactForm({ hendleSubmit }) {
       <Button type="submit">Add contact</Button>
     </form>
   );
-}
-
-ContactForm.propTypes = {
-  hendleSubmit: PropTypes.func.isRequired,
 };

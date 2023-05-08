@@ -1,9 +1,4 @@
-// export const statusFilters = Object.freeze({
-//   all: 'all',
-//   active: 'active',
-//   completed: 'completed',
-// });
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const Contacts = createSlice({
   name: 'contacts',
@@ -16,27 +11,20 @@ export const Contacts = createSlice({
     ],
     filter: '',
   },
+
   reducers: {
-    addContacts: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-      prepare(text) {
-        return {
-          payload: {
-            text,
-            id: nanoid(),
-          },
-        };
-      },
+    addContacts(state, action) {
+      state.contacts.push(action.payload);
     },
-  },
-  deleteContacts(state, action) {
-    const index = state.findIndex(task => task.id === action.payload);
-    state.splice(index, 1);
-  },
-  contactsFilter(state, action) {
-    return (state = action.payload);
+    deleteContacts(state, action) {
+      const index = state.contacts.findIndex(
+        contact => contact.id === action.payload
+      );
+      state.contacts.splice(index, 1);
+    },
+    contactsFilter(state, action) {
+      state.filter = action.payload;
+    },
   },
 });
 

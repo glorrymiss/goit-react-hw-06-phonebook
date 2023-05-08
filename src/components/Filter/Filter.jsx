@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Title } from './Filter.styled';
-// import PropTypes from 'prop-types';
-// import { contactsFilter } from 'redux/contacts';
-import { getFilter } from 'redux/selectors';
 
-export const Filter = ({ onChange, value }) => {
+import { getFilter } from 'redux/selectors';
+import { contactsFilter } from 'redux/contacts';
+
+export const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
 
   const filterChange = event => {
-    dispatch(event.currentTarget.value);
+    dispatch(contactsFilter(event.currentTarget.value));
   };
 
   return (
@@ -19,8 +19,3 @@ export const Filter = ({ onChange, value }) => {
     </>
   );
 };
-
-// Filter.propTypes = {
-//   onChange: PropTypes.func.isRequired,
-//   value: PropTypes.string.isRequired,
-// };
