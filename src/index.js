@@ -7,11 +7,11 @@ import { persistor, store } from './redux/store';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <PersistGate loading={null} persistor={persistor}>
-      <Provider store={store}>
+  <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <React.StrictMode>
         <App />
-      </Provider>
-    </PersistGate>
-  </React.StrictMode>
+      </React.StrictMode>
+    </Provider>
+  </PersistGate>
 );
