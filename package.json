@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://glorrymiss.github.io/goit-react-hw-06-phonebook.git/",
+  "homepage": "https://glorrymiss.github.io/goit-react-hw-06-phonebook/",
   "dependencies": {
     "@emotion/styled": "^11.10.8",
     "@redux-devtools/extension": "^3.2.5",
